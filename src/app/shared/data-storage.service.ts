@@ -33,11 +33,15 @@ export class DataStorageService {
       )
       .pipe(
         map(recipes => {
+
           return recipes.map(recipe => {
             return {
               ...recipe,
               ingredients: recipe.ingredients ? recipe.ingredients : []
             };
+            // let ingredients = recipe.ingredients ? recipe.ingredients : [];
+            // recipe.ingredients = ingredients;
+            // return recipe;
           });
         }),
         tap(recipes => {

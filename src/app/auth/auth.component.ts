@@ -6,7 +6,8 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent, interval  } from 'rxjs';
+import { switchMap  } from 'rxjs/operators';
 
 import { AuthService, AuthResponseData } from './auth.service';
 import { AlertComponent } from '../shared/alert/alert.component';
@@ -30,8 +31,16 @@ export class AuthComponent implements OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
-  onSwitchMode() {
+  onSwitchMode(event: MouseEvent) {
     this.isLoginMode = !this.isLoginMode;
+
+    // const clickEvent = fromEvent(event.target, event.type);
+    // const emitted = interval(1000);
+
+    // clickEvent.pipe(switchMap(
+    //   event => emitted
+    // ))
+    // .subscribe( value => console.log(value))
   }
 
   onSubmit(form: NgForm) {

@@ -12,6 +12,7 @@ import { LoggingService } from '../logging.service';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
+  currentIngredient: Ingredient;
   private subscription: Subscription;
 
   constructor(
@@ -20,6 +21,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
+    console.log("Index: "+this.currentIngredient);
+
     this.ingredients = this.slService.getIngredients();
     this.subscription = this.slService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
@@ -30,7 +34,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit!');
   }
 
-  onEditItem(index: number) {
+  onEditItem(index: number, ingredient?: Ingredient) {
+
+    this.currentIngredient = ingredient;
+
     this.slService.startedEditing.next(index);
   }
 
